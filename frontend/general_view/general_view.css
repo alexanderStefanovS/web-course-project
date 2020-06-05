@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+}
+
+.header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #ff8000;
+    color: white;
+}
+
+.center {
+    text-align: center;
+}
+
+.page-heading {
+    font-size: 40px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.paragraph-heading {
+    font-size: 35px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.floor-heading {
+    font-size: 30px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 75%;
+    left: 12.5%;
+    padding: 15px;
+}
+
+.row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.col-sm {
+    flex-grow: 1;
+}
+
+.col-lg {
+    flex-grow: 2;
+}
+
+.hall {
+    padding: 5px;
+    height: 150px;
+    margin-left: 10px;
+
+    background:#ff8000;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
+}
+
+.btn-group {
+    display: flex; 
+    justify-content: center;
+}
+
+.nav-btn {
+    width: 100px; 
+    height: 50px;
+}
+
+.mr {
+    margin-right: 10px;
+}
+
+.mt {
+    margin-top: 25px;
+}
