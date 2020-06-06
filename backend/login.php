@@ -14,7 +14,7 @@ if (isset($_SESSION['username'])) {
     if (empty($phpInput['username']) || empty($phpInput['password'])) {
         echo json_encode([
             'success' => false,
-            'message' => "Моля, попълнете всички задължителни полета.",
+            'message' => "Моля, попълнете потребителско име и парола.",
         ]);
     }
     else {

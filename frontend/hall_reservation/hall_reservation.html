@@ -1,0 +1,30 @@
+<html>
+	<head>
+			<meta charset="UTF-8"/>
+			<title>Вход</title>
+			<link href="./login.css" rel="stylesheet"/>
+			<script src="login.js" defer></script>
+	</head>
+	<body>
+		<div id="container">
+			<form id="reservation-form">
+				<h1 id="reservation-heading">Запазване на зала</h1>
+				
+				<label for="hall">Номер на зала:</label>
+                <input id="hall" type="text" name="hall" placeholder="Номер на зала">
+				
+				<label for="subject">Предмет:</label>
+                <input id="subject" type="password" name="subject" placeholder="Паролa">
+
+                <label for="date">Дата:</label>
+                <input id="date" type="date" name="date" placeholder="Дата">
+
+                <label for="date">Час:</label>
+                <input id="date" type="time" name="date" placeholder="Час">
+
+				<button type="submit">Запази</button>
+				<p id="user-message"></p>
+			</form>
+		</div>
+	</body>
+</html> 

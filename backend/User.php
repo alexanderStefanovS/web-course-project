@@ -24,7 +24,7 @@ class User {
         
         require_once "./DB.php";
 
-        $db = new Db();
+        $db = new DB();
         
 		$conn = $db->getConnection();
 		
