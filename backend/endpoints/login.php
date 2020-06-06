@@ -22,7 +22,7 @@ if (isset($_SESSION['username'])) {
         $username = $phpInput['username'];
         $password = $phpInput['password'];
 
-        require_once "./User.php";
+        require_once "../models/User.php";
 
         $user = new User($phpInput['username'], $phpInput['password'], null, null, null, null);
 

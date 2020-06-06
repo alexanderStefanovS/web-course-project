@@ -22,7 +22,7 @@ class User {
 
 	public function checkLogin(): void {
         
-        require_once "./DB.php";
+        require_once "../db/DB.php";
 
         $db = new Db();
         
