@@ -1,7 +1,7 @@
 <?php
 
-require_once "./DB.php";
-require_once "./hall.php";
+require_once "../db/DB.php";
+require_once "../models/hall.php";
 
 function getHalls($connection) {
 	$sql = "SELECT * FROM `halls`";
