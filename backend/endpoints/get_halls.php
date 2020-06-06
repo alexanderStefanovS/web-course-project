@@ -22,9 +22,9 @@ try {
 }
 catch (PDOException $e) {
 	echo json_encode([
-		'success' => true,
+		'success' => false,
     'message' => "Неуспешно свързване с базата данни",
-    'value' => ['аса', 'асд', 'адф']
+    'value' => null
 	]);
 }
 

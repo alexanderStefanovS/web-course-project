@@ -8,7 +8,7 @@ const onFormSubmitted = event => {
         password: formElement.querySelector("input[name='password']").value,
     };
     
-    fetch('../../backend/login.php', {
+    fetch('../../backend/endpoints/login.php', {
         method: 'POST',
         body: JSON.stringify(formData),
     })
