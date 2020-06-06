@@ -33,7 +33,7 @@
       ]);
     }
 
-    $exists = doesUserExist($connection, 'asdf');
+    $exists = doesUserExist($connection, $username);
     echo json_encode([
       'success' => true,
       'message' => "Данни за потребител",
