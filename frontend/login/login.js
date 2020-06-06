@@ -15,7 +15,7 @@ const onFormSubmitted = event => {
     .then(response=>response.json())
     .then(response => {
         if (response.success) {
-    
+            location.replace("../general_view/general_view.html");
         } else {
             document.getElementById('user-message').innerText = response.message;
         }

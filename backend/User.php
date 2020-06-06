@@ -37,7 +37,7 @@ class User {
 		}
 		
         if (!password_verify($this->password, $dbUser['password'])) {
-            throw new Exception("Грешна комбинация от потребителско име и парола");
+            throw new Exception("Грешна парола.");
         }
 
 	}
