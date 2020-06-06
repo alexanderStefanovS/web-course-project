@@ -48,15 +48,23 @@ document.getElementById('bl2-b').addEventListener("click", () => {
 // #region Services
 
 function getHalls() {
-
-  fetch("http://localhost:80/web/web-course-project/backend/get_halls.php")
+  fetch("../../backend/endpoints/get_halls.php")
     .then(response => {
       return response.json();
     })
     .then(data => {
       placeHalls(data.value);
     });
+}
 
+function checkUser() {
+  fetch('../../backend/endpoints/check_user.php')
+    .then(response => {
+      return response.text()
+    })
+    .then( data => {
+      console.log(data)
+    });
 }
 
 // #endregion
@@ -76,8 +84,6 @@ function placeHalls(halls) {
 
 //#endregion
 
-fetch('../../backend/check_user.php').then( response => {return response.text()} )
-.then( data => console.log(data));
-
 getHalls();
+checkUser();
 
