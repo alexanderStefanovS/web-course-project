@@ -37,6 +37,11 @@ body {
     padding: 15px;
 }
 
+.distance {
+    border: solid;
+    border-color: black;
+}
+
 .row {
     display: flex;
     flex-flow: row wrap;

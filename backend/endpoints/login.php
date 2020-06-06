@@ -24,7 +24,7 @@ if (isset($_SESSION['username'])) {
 
         require_once "../models/User.php";
 
-        $user = new User($phpInput['username'], $phpInput['password'], null, null, null, null);
+        $user = new User(null, $phpInput['username'], $phpInput['password'], null, null, null, null);
 
         try {
 

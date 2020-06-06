@@ -2,15 +2,17 @@
 
 class User {
 
-	private $username;
-	private $password;
-	private $email;
-	private $firstname;
-	private $lastname;
-	private $role;
+	public $id;
+	public $username;
+	public $password;
+	public $email;
+	public $firstname;
+	public $lastname;
+	public $role;
 	
-	public function __construct($username, $password, $email, $firstname, $lastname, $role) {
+	public function __construct($id, $username, $password, $email, $firstname, $lastname, $role) {
 		
+		$this->id = $id;
 		$this->username = $username;
 		$this->password = $password;
 		$this->email = $email;

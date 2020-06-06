@@ -60,10 +60,14 @@ function getHalls() {
 function checkUser() {
   fetch('../../backend/endpoints/check_user.php')
     .then(response => {
-      return response.text()
+      return response.json()
     })
     .then( data => {
-      console.log(data)
+      if (!data.value) {
+        location.replace("../frontend/login/login.html");
+      } else {
+        console.log(data.value);
+      }
     });
 }
 
