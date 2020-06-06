@@ -1,20 +1,20 @@
 <?php
 
   require_once "../db/DB.php";
+  require_once "../models/User.php";
 
   session_start();
 
-  function doesUserExist($connection, $username) {
+  function getUser($connection, $username): User {
     $sql = "SELECT * FROM `users` WHERE username = :username";
     $query = $connection->prepare($sql);
     $query->execute(['username' => $username]);
   
-    $userId = null;
     while ($row = $query->fetch()) {
-      $userId = $row["id"];
+      $user = new User($row["id"], $row["username"], null, null, null, null, $row["roles_id"]);
     }
 
-    return $userId != null;
+    return $user;
   }
 
   if (isset($_SESSION['username'])) {
@@ -33,11 +33,11 @@
       ]);
     }
 
-    $exists = doesUserExist($connection, $username);
+    $user = getUser($connection, $username);
     echo json_encode([
       'success' => true,
       'message' => "Данни за потребител",
-      'value' => $exists
+      'value' => $user
     ]);
 
   } else {

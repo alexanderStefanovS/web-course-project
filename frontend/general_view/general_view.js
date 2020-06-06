@@ -64,8 +64,10 @@ function checkUser() {
     })
     .then( data => {
       if (!data.value) {
-        location.replace("./frontend/login/login.html");
-      } 
+        location.replace("../frontend/login/login.html");
+      } else {
+        console.log(data.value);
+      }
     });
 }
 
