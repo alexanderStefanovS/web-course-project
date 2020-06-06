@@ -54,11 +54,13 @@ body {
     padding: 5px;
     height: 150px;
     margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
 
     background:#ff8000;
     color: white;
-    font-weight: bold;
-    font-size: 3em;
+    /* font-weight: bold;
+    font-size: 25px; */
     text-align: center;
 }
 
@@ -68,8 +70,10 @@ body {
 }
 
 .nav-btn {
-    width: 100px; 
+    width: 145px; 
     height: 50px;
+    background-color: #919089;
+    color: white;
 }
 
 .mr {
@@ -78,4 +82,8 @@ body {
 
 .mt {
     margin-top: 25px;
+}
+
+#f2, #f3, #bl2 {
+    display: none;
 }
