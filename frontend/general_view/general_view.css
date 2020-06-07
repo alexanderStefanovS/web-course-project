@@ -13,11 +13,17 @@ body {
     text-align: center;
 }
 
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
 .page-heading {
     font-size: 40px;
     font-family: "Comic Sans MS", cursive, sans-serif;
     margin-bottom: 0;
     margin-top: 0;
+    margin-left: 120px;
 }
 
 .paragraph-heading {
@@ -40,6 +46,9 @@ body {
 .distance {
     border: solid;
     border-color: black;
+    border-width: 1px;
+    height: 300px;
+    margin-bottom: 300px;
 }
 
 .row {
@@ -72,6 +81,7 @@ body {
 .btn-group {
     display: flex; 
     justify-content: center;
+    margin-top: 25px;
 }
 
 .nav-btn {
@@ -79,6 +89,12 @@ body {
     height: 50px;
     background-color: #919089;
     color: white;
+}
+
+#go-btn {
+    background-color: #919089;
+    color: white;
+    margin-right: 15px;
 }
 
 .mr {
@@ -91,4 +107,24 @@ body {
 
 #f2, #f3, #bl2 {
     display: none;
+}
+
+#dist-header {
+    margin-top: 0;
+}
+
+.container input {
+    width: 200px;
+    height: 50px;
+    background-color: #f2f2f2;
+    font-size: x-large;
+}
+
+.container label {
+    font-size: x-large;
+    margin-left: 25px;
+}
+
+#dist-group {
+    margin-top: 20px;
 }

@@ -43,9 +43,13 @@ document.getElementById('bl2-b').addEventListener("click", () => {
   block2.style.display = 'block';
 });
 
+document.getElementById('go-btn').addEventListener("click", () => {
+  location.replace("../hall_reservation/hall_reservation.html");
+});
+
 //#endregion
 
-// #region Services
+//#region Services
 
 function getHalls() {
   fetch("../../backend/endpoints/get_halls.php")
@@ -64,7 +68,7 @@ function checkUser() {
     })
     .then( data => {
       if (!data.value) {
-        location.replace("../frontend/login/login.html");
+        location.replace("../login/login.html");
       } else {
         console.log(data.value);
       }
@@ -73,7 +77,7 @@ function checkUser() {
 
 // #endregion
 
-//#region functions
+//#region Functions
 
 function placeHalls(halls) {
   
@@ -88,6 +92,5 @@ function placeHalls(halls) {
 
 //#endregion
 
-getHalls();
 checkUser();
-
+getHalls();
