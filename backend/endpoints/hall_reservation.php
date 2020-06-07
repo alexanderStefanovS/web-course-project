@@ -7,10 +7,18 @@ session_start();
 $phpInput = json_decode(file_get_contents('php://input'), true);
 
 function validateHours($hourFrom, $hourTo) {
-    if ($hourFrom == $hourTo || $hourTo < $hourFrom) {
+    return $hourFrom != $hourTo && $hourTo > $hourFrom 
+        && $hourFrom >= 7 && $hourFrom <= 20 && $hourTo>= 7 && $hourTo <= 20;
+}
+
+function validateDate($date){
+    if(!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $date)) {
         return false;
     }
-    return true;
+    $dateSplit = explode('-', $date);
+    $myDate = strtotime($date);
+    $minDate = date('Y-m-d');
+    return checkdate($dateSplit[1], $dateSplit[2], $dateSplit[0]) && $myDate > $minDate;
 }
 
 if (!isset($_SESSION['username'])) {
@@ -32,10 +40,10 @@ if (!isset($_SESSION['username'])) {
         $hallsId = $phpInput['hallsId'];
         $usersSubjectsId = $phpInput['usersSubjectsId'];
         $date = $phpInput['date'];
-        $hourFrom = $phpInput['hourFrom'];
-        $hourTo = $phpInput['hourTo'];
+        $hourFrom = (int)$phpInput['hourFrom'];
+        $hourTo = (int)$phpInput['hourTo'];
 
-        if(!validateHours($hourFrom, $hourTo)) {
+        if(!validateHours($hourFrom, $hourTo) || !validateDate($date)) {
             echo json_encode([
                 'success' => false,
                 'message' => "Въведените данни не са валидни.",

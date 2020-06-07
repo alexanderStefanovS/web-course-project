@@ -82,10 +82,22 @@ function findHallId(hall) {
 }
 
 function validateHours(hourFrom, hourTo) {
-    if (hourFrom === hourTo || hourTo < hourFrom) {
-        return false;
-    }
-    return true;
+    return hourFrom !== hourTo && parseInt(hourTo) > parseInt(hourFrom);
+}
+
+function setMinDate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if(dd < 10){
+        dd = '0' + dd;
+    } 
+    if(mm < 10){
+        mm = '0' + mm;
+    } 
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("date").setAttribute("min", today);
 }
 
 //#endregion
@@ -98,7 +110,7 @@ const onFormSubmitted = event => {
     const formElement = event.target;
 
     const hall = formElement.querySelector("input[name='hall']").value;
-    const usersSubjectsId = formElement.querySelector("input[name='subject']").value;
+    const usersSubjectsId = formElement.querySelector("select[name='subject']").value;
     const date = formElement.querySelector("input[name='date']").value;
     const hourFrom = formElement.querySelector("select[name='hour-from']").value;
     const hourTo = formElement.querySelector("select[name='hour-to']").value;
@@ -137,6 +149,7 @@ document.getElementById('reservation-form').addEventListener('submit', onFormSub
 
 getTimeOptionsFrom();
 getTimeOptionsTo();
+setMinDate();
 
 let user;
 checkUser();
