@@ -1,5 +1,7 @@
 <?php
 
+require_once "../db/DB.php";
+
 class Reservation {
 
     public $id;
@@ -17,32 +19,43 @@ class Reservation {
     }
 
     public function storeInDb(): void {
-
-        require_once "../db/DB.php";
-        
         $database = new DB();
         $connection = $database->getConnection();
 
-        $insertStatement = $conn->prepare(
+        $insertStatement = $connection->prepare(
             "INSERT INTO `halls_schedule` (date, hour, users_subjects_id, halls_id)
              VALUES (:date, :hour, :users_subjects_id, :halls_id)");
 
         $insertResult = $insertStatement->execute([
-                'date' => $this->username,
-				'hour' => $hashedPassword,
-				'users_subjects_id' => $this->email,
-				'halls_id' => $this->firstname,
+                'date' => $this->date,
+				'hour' => $this->hour,
+				'users_subjects_id' => $this->users_subjects_id,
+				'halls_id' => $this->halls_id,
             ]);
 		
         if (!$insertResult) {
-            $errorInfo = $insertStatement->errorInfo();
-            $errorMessage = "";
-            
-            if ($errorInfo[1] == 1062) {
-                $errorMessage = "Потребителското име вече съществува.";
-            } else {
-                $errorMessage = "Грешка при запис на информацията.";
-            }
+            $errorMessage = "Грешка при запис на информацията.";
+            throw new Exception($errorMessage);
+        }
+    }
+
+    public function checkReservation(): void {
+        $database = new DB();
+        $connection = $database->getConnection();
+
+        $selectStatement = $connection->prepare("SELECT * FROM `halls_schedule` WHERE date = :date 
+            AND hour = :hour AND halls_id = :halls_id");
+        
+        $result = $selectStatement->execute([
+            'date' => $this->date,
+            'hour' => $this->hour,
+            'halls_id' => $this->halls_id,
+            ]);
+        
+        $reservation = $selectStatement->fetch();
+        
+        $errorMessage = "Залата вече е запазена за този часови диапазон. Моля, изберете друга зала.";
+        if($reservation) {
             throw new Exception($errorMessage);
         }
     }

@@ -1,25 +1,20 @@
+//#region Services
+
+const TEACHER_ROLE = '2';
+
 function checkUser() {
     fetch('../../backend/endpoints/check_user.php')
     .then(response => {
         return response.json()
     })
     .then( data => {
-        if (!data.value) {
+        if (!data.value || data.value.role !== '2') {
             location.replace("../login/login.html");
         } else {
             user = data.value;
+            getTeacherSubjects();
         }
     });
-}
-
-function getTimeOptions() {
-    var element = document.getElementById('hour');
-    for(var i = 7; i <= 19; i ++){
-        var option = document.createElement('option');
-        option.text = i + ":00";
-        option.value = i;
-        element.appendChild(option);
-    }
 }
 
 function getHalls() {
@@ -32,35 +27,70 @@ function getHalls() {
     });
 }
 
-function findHallId(hall) {
-    let hall_id = -1;
-    halls.forEach( (h) => {
-        if (h.number === hall) {
-            hall_id = h.id;
-        }
-    });
-    return hall_id;
-}
-
-function getSubjects() {
-    fetch("../../backend/endpoints/get_subjects.php")
+function getTeacherSubjects() {
+    fetch("../../backend/endpoints/get_teacher_subjects.php?userId=" + user.id)
     .then(response => {
         return response.json();
     })
     .then(data => {
         subjects = data.value;
+        getTeacherSubjectsOptions();
     });
 }
 
-function findSubjectId(subject) {
-    let subject_id = -1;
-    subjects.forEach( (s) => {
-        if (s.name == subject) {
-            subject_id = s.id;
+//#endregion
+
+//#region Functions
+function getTimeOptionsFrom() {
+    var hourFrom = document.getElementById('hour-from');
+    for(var i = 7; i <= 20; i ++){
+        var option = document.createElement('option');
+        option.text = i + ":00 ч.";
+        option.value = i;
+        hourFrom.appendChild(option);
+    }
+}
+
+function getTimeOptionsTo() {
+    var hourTo = document.getElementById('hour-to');
+    for(var i = 7; i <= 20; i ++){
+        var option = document.createElement('option');
+        option.text = i + ":00 ч.";
+        option.value = i;
+        hourTo.appendChild(option);
+    }
+}
+
+function getTeacherSubjectsOptions() {
+    var subjectElement = document.getElementById('subject');
+    subjects.forEach( (subject) => {
+        var option = document.createElement('option');
+        option.text = subject.subjectName + " - " + subject.course + " курс, " + subject.specialty;
+        option.value = subject.id;
+        subjectElement.appendChild(option);
+    });
+}
+
+function findHallId(hall) {
+    let hallId = -1;
+    halls.forEach( (h) => {
+        if (h.number === hall) {
+            hallId = h.id;
         }
     });
-    return subject_id;
+    return hallId;
 }
+
+function validateHours(hourFrom, hourTo) {
+    if (hourFrom === hourTo || hourTo < hourFrom) {
+        return false;
+    }
+    return true;
+}
+
+//#endregion
+
+//#region DOM events
 
 const onFormSubmitted = event => {
     event.preventDefault();
@@ -68,42 +98,45 @@ const onFormSubmitted = event => {
     const formElement = event.target;
 
     const hall = formElement.querySelector("input[name='hall']").value;
-    const subject = formElement.querySelector("input[name='subject']").value;
+    const usersSubjectsId = formElement.querySelector("input[name='subject']").value;
     const date = formElement.querySelector("input[name='date']").value;
-    const hour = formElement.querySelector("select[name='hour']").value;
+    const hourFrom = formElement.querySelector("select[name='hour-from']").value;
+    const hourTo = formElement.querySelector("select[name='hour-to']").value;
 
-    const hall_id = findHallId(hall);
-    const subject_id = findSubjectId(subject);
+    if (!validateHours(hourFrom, hourTo)) {
+        document.getElementById('user-message').innerText = "Моля, въведете валиден часови диапазон.";
+    } else {
 
-    const formData = {
-        user_id: user.id,
-        hall_id: hall_id,
-        subject_id: subject_id,
-        date: date,
-        hour: time,
-    };
+        const hallId = findHallId(hall);
 
-    console.log(formData);
-    
-    fetch('../../backend/endpoints/hall_reservation.php', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-    })
-    .then(response=>response.json())
-    .then(response => {
-        if (response.success) {
-            
-        } else {
+        const formData = {
+            hallsId: hallId,
+            usersSubjectsId: usersSubjectsId,
+            date: date,
+            hourFrom: hourFrom,
+            hourTo: hourTo,
+        };
+
+        console.log(formData);
+        
+        fetch('../../backend/endpoints/hall_reservation.php', {
+            method: 'POST',
+            body: JSON.stringify(formData),
+        })
+        .then(response=>response.json())
+        .then(response => {
+            console.log(response);
             document.getElementById('user-message').innerText = response.message;
-        }
-    });
-
-    return false;
+        });
+    }
 }
 
 document.getElementById('reservation-form').addEventListener('submit', onFormSubmitted);
 
-getTimeOptions();
+//#endregion
+
+getTimeOptionsFrom();
+getTimeOptionsTo();
 
 let user;
 checkUser();
@@ -112,7 +145,6 @@ let halls;
 getHalls();
 
 let subjects;
-getSubjects();
 
 
 

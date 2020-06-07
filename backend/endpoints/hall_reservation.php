@@ -1,46 +1,88 @@
 <?php
 
+require_once "../models/Reservation.php";
+
 session_start();
 
 $phpInput = json_decode(file_get_contents('php://input'), true);
 
-if (isset($_SESSION['username'])) {
+function validateHours($hourFrom, $hourTo) {
+    if ($hourFrom == $hourTo || $hourTo < $hourFrom) {
+        return false;
+    }
+    return true;
+}
+
+if (!isset($_SESSION['username'])) {
     echo json_encode([
-        'success' => true,
-        'username' => $_SESSION['username'],
+        'success' => false,
+        'message' => "Потребителят не е влязъл в системата.",
     ]);
 } else {
     $username = $_SESSION['username'];
 
-    if (empty($phpInput['hall_id']) || empty($phpInput['subject_id']) || empty($phpInput['date']) || empty($phpInput['time'])) {
+    if (empty($phpInput['hallsId']) || empty($phpInput['usersSubjectsId']) || empty($phpInput['date']) 
+    || empty($phpInput['hourFrom']) || empty($phpInput['hourTo'])) {
         echo json_encode([
             'success' => false,
             'message' => "Моля, попълнете всички полета.",
         ]);
     } else {
 
-        $user_id = $phpInput['user_id'];
-        $halls_id = $phpInput['hall_id'];
-        $subjects_id = $phpInput['subject_id'];
+        $hallsId = $phpInput['hallsId'];
+        $usersSubjectsId = $phpInput['usersSubjectsId'];
         $date = $phpInput['date'];
-        $hour = $phpInput['hour'];
+        $hourFrom = $phpInput['hourFrom'];
+        $hourTo = $phpInput['hourTo'];
 
-        require_once "../models/Reservation.php";
-
-        $reservation = new Reservation(null, $date, $hour, $users_subjects_id, $hall_id);
-
-        try {
-
-            $reservation->storeInDb();
-            
-        } catch (Exception $e) {
-            
+        if(!validateHours($hourFrom, $hourTo)) {
             echo json_encode([
                 'success' => false,
-                'message' => $e->getMessage(),
+                'message' => "Въведените данни не са валидни.",
             ]);
+            exit();
         }
 
+        // check if reservation does not already exist
+        $doExist = false;
+        for($x = $hourFrom; $x < $hourTo; $x++) {
+
+            $reservation = new Reservation(null, $date, $x, $usersSubjectsId, $hallsId);
+            try {
+                $reservation->checkReservation();
+
+            } catch (Exception $e) {
+                echo json_encode([
+                    'success' => false,
+                    'message' => $e->getMessage(),
+                ]);
+                $doExist = true;
+                break;
+            }
+        }
+        
+        if($doExist == false) {
+            var_dump($doExist);
+            // for every hour reserve hall
+            for($x = $hourFrom; $x < $hourTo; $x++) {
+
+                $reservation = new Reservation(null, $date, $x, $usersSubjectsId, $hallsId);
+                try {
+                    $reservation->storeInDb();
+
+                } catch (Exception $e) {
+                    echo json_encode([
+                        'success' => false,
+                        'message' => $e->getMessage(),
+                    ]);
+                }
+            }
+
+            echo json_encode([
+                'success' => true,
+                'message' => "Залата е запазена успешно.",
+            ]);
+        }
 
     }
 

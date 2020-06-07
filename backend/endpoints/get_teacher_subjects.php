@@ -1,17 +1,23 @@
 <?php
 
 require_once "../db/DB.php";
-require_once "../models/Subject.php";
+require_once "../models/UserSubject.php";
 
 function getSubjects($connection) {
 
-    $query = $connection->prepare("SELECT * FROM `subjects`");
-	$query->execute([]);
+    $userId = $_REQUEST["userId"];
+
+    $sql = "SELECT users_subjects.id, users_subjects.course, users_subjects.specialty, subjects.name
+    FROM `subjects` JOIN `users_subjects` ON users_subjects.subjects_id = subjects.id 
+    WHERE users_id = :users_id;";
+
+    $query = $connection->prepare($sql);
+	$query->execute([ 'users_id' => $userId ]);
 
     $subjects = array();
 
 	while ($row = $query->fetch()) {
-        $subject = new Subject($row['id'], $row['name'], $row['type']);
+        $subject = new UserSubject($row['id'], $row['course'], $row['specialty'], $row['name']);
         array_push($subjects, $subject);
     }
 	return $subjects;
@@ -33,7 +39,7 @@ $subjects = getSubjects($connection);
 
 echo json_encode([
     'success' => true,
-    'message' => "Списък от всички предмети.",
+    'message' => "Списък от всички предмети на преподавателя.",
     'value' => $subjects,
 ]);
 

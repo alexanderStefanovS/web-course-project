@@ -13,13 +13,16 @@
                 <input id="hall" type="text" name="hall" placeholder="Номер на зала">
 				
 				<label for="subject">Предмет:</label>
-                <input id="subject" name="subject" type="text">
+                <select id="subject" name="subject">
 
                 <label for="date">Дата:</label>
                 <input id="date" type="date" name="date" placeholder="Дата">
 
-                <label for="hour">Час:</label>
-                <select id="hour" name="hour"></select>
+                <label for="hour">Oт:</label>
+				<select id="hour-from" name="hour-from"></select>
+				
+				<label for="hour">До:</label>
+                <select id="hour-to" name="hour-to"></select>
 
 				<button type="submit">Запази</button>
 				<p id="user-message"></p>
