@@ -5,7 +5,7 @@ const TEACHER_ROLE = '2';
 function checkUser() {
     fetch('../../backend/endpoints/check_user.php')
     .then(response => {
-        return response.json()
+        return response.json();
     })
     .then( data => {
         if (!data.value || data.value.role !== '2') {
