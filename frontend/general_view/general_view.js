@@ -1,4 +1,8 @@
 
+//#region Constants
+  const TEACHER_ROLE = 2;
+//#endregion
+
 //#region DOM elements
 
 const floor1 = document.getElementById('f1');
@@ -6,6 +10,7 @@ const floor2 = document.getElementById('f2');
 const floor3 = document.getElementById('f3');
 const block2 = document.getElementById('bl2');
 const floorHeader = document.getElementById('floor-header');
+const goBtn = document.getElementById('go-btn');
 
 //#endregion
 
@@ -43,7 +48,7 @@ document.getElementById('bl2-b').addEventListener("click", () => {
   block2.style.display = 'block';
 });
 
-document.getElementById('go-btn').addEventListener("click", () => {
+goBtn.addEventListener("click", () => {
   location.replace("../hall_reservation/hall_reservation.html");
 });
 
@@ -70,7 +75,10 @@ function checkUser() {
       if (!data.value) {
         location.replace("../login/login.html");
       } else {
-        console.log(data.value);
+        console.log(data);
+        if (data.value.role !== TEACHER_ROLE) {
+          hideGoBtn();
+        }
       }
     });
 }
@@ -80,14 +88,16 @@ function checkUser() {
 //#region Functions
 
 function placeHalls(halls) {
-  
   halls.forEach( (hall) => {
     const element = document.getElementById(hall.number);
     if (element) {
       element.innerHTML = hall.number + "<br>" + hall.type;
     }
   });
+}
 
+function hideGoBtn() {
+  goBtn.style.display = 'none';
 }
 
 //#endregion

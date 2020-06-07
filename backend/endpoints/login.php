@@ -4,10 +4,10 @@ session_start();
 
 $phpInput = json_decode(file_get_contents('php://input'), true);
 
-if (isset($_SESSION['username'])) {
+if (!isset($phpInput['username']) || !isset($phpInput['password'])) {
     echo json_encode([
-        'success' => true,
-        'username' => $_SESSION['username'],
+        'success' => false,
+        'message' => "Моля, попълнете потребителско име и парола.",
     ]);
 } else {
 
