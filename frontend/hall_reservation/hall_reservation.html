@@ -1,9 +1,8 @@
 <html>
 	<head>
 			<meta charset="UTF-8"/>
-			<title>Вход</title>
-			<link href="./login.css" rel="stylesheet"/>
-			<script src="login.js" defer></script>
+			<title>Запазване на зала</title>
+			<script src="./hall_reservation.js" defer></script>
 	</head>
 	<body>
 		<div id="container">
@@ -14,13 +13,13 @@
                 <input id="hall" type="text" name="hall" placeholder="Номер на зала">
 				
 				<label for="subject">Предмет:</label>
-                <input id="subject" type="password" name="subject" placeholder="Паролa">
+                <input id="subject" name="subject" type="text">
 
                 <label for="date">Дата:</label>
                 <input id="date" type="date" name="date" placeholder="Дата">
 
-                <label for="date">Час:</label>
-                <input id="date" type="time" name="date" placeholder="Час">
+                <label for="hour">Час:</label>
+                <select id="hour" name="hour"></select>
 
 				<button type="submit">Запази</button>
 				<p id="user-message"></p>
