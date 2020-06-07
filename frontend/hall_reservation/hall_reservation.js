@@ -1,15 +1,16 @@
 //#region Services
 
+const TEACHER_ROLE = '2';
+
 function checkUser() {
     fetch('../../backend/endpoints/check_user.php')
     .then(response => {
         return response.json()
     })
     .then( data => {
-        if (!data.value) {
+        if (!data.value || data.value.role !== '2') {
             location.replace("../login/login.html");
         } else {
-            console.log(data.value);
             user = data.value;
         }
     });
