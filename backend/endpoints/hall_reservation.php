@@ -6,24 +6,12 @@ session_start();
 
 $phpInput = json_decode(file_get_contents('php://input'), true);
 
-function findUsersSubjectsId($users_id, $subjects_id) {
-    require_once "../db/DB.php";
-    
-    $database = new DB();
-    $connection = $database->getConnection();
-
-    $selectStatement = $connection->prepare(
-        "SELECT * FROM `users_subjects` WHERE users_id = :users_id AND subjects_id = :subjects_id");
-
-    $result = $selectStatement->execute([
-            'users_id' => $users_id,
-            'subjects_id' => $subjects_id,
-        ]);
-    
-    $users_subjects = $selectStatement->fetch();
-    return $users_subjects;
+function validateHours($hourFrom, $hourTo) {
+    if ($hourFrom == $hourTo || $hourTo < $hourFrom) {
+        return false;
+    }
+    return true;
 }
-
 
 if (!isset($_SESSION['username'])) {
     echo json_encode([
@@ -33,29 +21,33 @@ if (!isset($_SESSION['username'])) {
 } else {
     $username = $_SESSION['username'];
 
-    if (empty($phpInput['hall_id']) || empty($phpInput['subject_id']) || empty($phpInput['date']) 
-    || empty($phpInput['hour_from']) || empty($phpInput['hour_to'])) {
+    if (empty($phpInput['hallsId']) || empty($phpInput['usersSubjectsId']) || empty($phpInput['date']) 
+    || empty($phpInput['hourFrom']) || empty($phpInput['hourTo'])) {
         echo json_encode([
             'success' => false,
             'message' => "Моля, попълнете всички полета.",
         ]);
     } else {
 
-        $user_id = $phpInput['user_id'];
-        $halls_id = $phpInput['hall_id'];
-        $subjects_id = $phpInput['subject_id'];
+        $hallsId = $phpInput['hallsId'];
+        $usersSubjectsId = $phpInput['usersSubjectsId'];
         $date = $phpInput['date'];
-        $hour_from = $phpInput['hour_from'];
-        $hour_to = $phpInput['hour_to'];
+        $hourFrom = $phpInput['hourFrom'];
+        $hourTo = $phpInput['hourTo'];
 
-        $users_subjects = findUsersSubjectsId($user_id, $subjects_id);
-        $users_subjects_id = $users_subjects['id'];
+        if(!validateHours($hourFrom, $hourTo)) {
+            echo json_encode([
+                'success' => false,
+                'message' => "Въведените данни не са валидни.",
+            ]);
+            exit();
+        }
 
         // check if reservation does not already exist
         $doExist = false;
-        for($x = $hour_from; $x < $hour_to; $x++) {
+        for($x = $hourFrom; $x < $hourTo; $x++) {
 
-            $reservation = new Reservation(null, $date, $x, $users_subjects_id, $halls_id);
+            $reservation = new Reservation(null, $date, $x, $usersSubjectsId, $hallsId);
             try {
                 $reservation->checkReservation();
 
@@ -65,15 +57,16 @@ if (!isset($_SESSION['username'])) {
                     'message' => $e->getMessage(),
                 ]);
                 $doExist = true;
-                return;
+                break;
             }
         }
         
         if($doExist == false) {
+            var_dump($doExist);
             // for every hour reserve hall
-            for($x = $hour_from; $x < $hour_to; $x++) {
+            for($x = $hourFrom; $x < $hourTo; $x++) {
 
-                $reservation = new Reservation(null, $date, $x, $users_subjects_id, $halls_id);
+                $reservation = new Reservation(null, $date, $x, $usersSubjectsId, $hallsId);
                 try {
                     $reservation->storeInDb();
 
