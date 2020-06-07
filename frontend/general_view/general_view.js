@@ -60,6 +60,12 @@ searchBtn.addEventListener('click', () => {
   const fromHall = document.getElementById('from').value;
   const toHall = document.getElementById('to').value;
 
+  if (!fromHall || !toHall) {
+    distMessage.innerText = 'Моля, въведете номерата и на двете зали';
+    distMessage.style.color = 'red';
+    return;
+  }
+
   const halls = {
     fromHall: fromHall, 
     toHall: toHall

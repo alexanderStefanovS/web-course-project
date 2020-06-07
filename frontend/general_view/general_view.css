@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .header {
@@ -91,7 +92,7 @@ body {
 }
 
 .nav-btn {
-    width: 145px; 
+    width: 155px; 
     height: 50px;
     border: 1px solid #ff8000;
     background: none;
@@ -101,6 +102,7 @@ body {
     overflow: hidden;
     color: #ff8000;
     font-weight: bold;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .nav-btn::before {
@@ -146,11 +148,11 @@ body {
     width: 20%;
     height: 100%;
     background-color: #f2f2f2;
-    font-size: x-large;
+    font-size: 20px;
 }
 
 .container label {
-    font-size: x-large;
+    font-size: 20px;
     margin-left: 25px;
 }
 
@@ -159,18 +161,19 @@ body {
 }
 
 #search-btn {
-    height: 50px;
-    width: 150px;
-    margin-top: 45px;
-    font-size: large;
+    height: 45px;
+    width: 130px;
+    margin-top: 30px;
+    font-size: 20px;
+    margin-right: 40px;
 }
 
 #dist-min {
     margin-left: 3rem;
     margin-top: 10px;
+    font-size: 20px;
 }
 
 #dist-label {
-    font-size: 30px;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 20px;
 }

@@ -18,6 +18,10 @@ function getFloor($hall, $connection) {
 function calculateDistance($from, $to, $fromFloor, $toFloor) {
   $seconds = 0;
 
+  if ($from == $to) {
+    return $seconds;
+  }
+
   if ($from == 325 || $from == 326 || $from == 327) {
     $from -= 23;
   }
