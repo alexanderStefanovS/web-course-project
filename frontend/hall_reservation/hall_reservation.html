@@ -3,30 +3,146 @@
 			<meta charset="UTF-8"/>
 			<title>Запазване на зала</title>
 			<script src="./hall_reservation.js" defer></script>
+			<link rel="stylesheet" type="text/css" href="hall_reservation.css">
 	</head>
 	<body>
-		<div id="container">
+		<div class="header d-flex">
+			<h2 class="page-heading">Система за управление на графика по стаи във ФМИ</h2>
+	</div>
+	<div class="center">
+		<h2 class="floor-heading">Запазване на зала от преподавател</h2>
+</div>
+	<div class="btn-group">
+			<button id="f1-b" class="nav-btn mr">ПЪРВИ ЕТАЖ</button>
+			<button id="f2-b" class="nav-btn mr">ВТОРИ ЕТАЖ</button>
+			<button id="f3-b" class="nav-btn mr">ТРЕТИ ЕТАЖ</button>
+			<button id="bl2-b" class="nav-btn">ВТОРИ ЕТАЖ - БАН</button>
+	</div>
+	<div class="center">
+			<h2 id="floor-header" class="floor-heading">Първи етаж</h2>
+	</div>
+	<div id="f1" class="container">
+			<div class="row">
+					<div id="109" class="col-sm hall"></div>
+					<div id="110" class="col-sm hall"></div>
+					<div id="111" class="col-sm hall"></div>
+					<div id="112" class="col-sm hall"></div>
+					<div id="100" class="col-sm hall"></div>
+					<div id="101" class="col-lg hall"></div>
+					<div id="102" class="col-sm hall"></div>
+			</div>
+			<div class="row mt">
+					<div id="108" class="col-sm hall"></div>
+					<div id="107" class="col-sm hall"></div>
+					<div id="106" class="col-sm hall"></div>
+					<div id="105" class="col-lg hall"></div>
+					<div id="104" class="col-lg hall"></div>
+					<div id="103" class="col-sm hall"></div>
+			</div>
+	</div>
+	<div id="f2" class="container">
+			<div class="row">
+					<div id="212" class="col-sm hall"></div>
+					<div id="213" class="col-sm hall"></div>
+					<div id="214" class="col-sm hall"></div>
+					<div id="200" class="col-lg hall"></div>
+					<div id="201" class="col-sm hall"></div>
+					<div id="202" class="col-sm hall"></div>
+					<div id="203" class="col-sm hall"></div>
+			</div>
+			<div class="row mt">
+					<div id="211" class="col-sm hall"></div>
+					<div id="210" class="col-sm hall"></div>
+					<div id="209" class="col-sm hall"></div>
+					<div id="208" class="col-sm hall"></div>
+					<div id="207" class="col-sm hall"></div>
+					<div id="206" class="col-sm hall"></div>
+					<div id="205" class="col-sm hall"></div>
+					<div id="204" class="col-sm hall"></div>
+			</div>
+	</div>
+	<div id="f3" class="container">
+			<div class="row">
+					<div id="309" class="col-sm hall"></div>
+					<div id="310" class="col-sm hall"></div>
+					<div id="311" class="col-sm hall"></div>
+					<div id="325" class="col-lg hall"></div>
+					<div id="326" class="col-lg hall"></div>
+					<div id="327" class="col-sm hall"></div>
+			</div>
+			<div class="row mt">
+					<div id="308" class="col-sm hall"></div>
+					<div id="307" class="col-sm hall"></div>
+					<div id="306" class="col-sm hall"></div>
+					<div id="305" class="col-sm hall"></div>
+					<div id="304" class="col-sm hall"></div>
+					<div id="303" class="col-sm hall"></div>
+					<div id="302" class="col-sm hall"></div>
+					<div id="301" class="col-sm hall"></div>
+			</div>
+	</div>
+	<div id="bl2" class="container">
+			<div class="row">
+					<div id="1" class="col-sm hall"></div>
+					<div id="2" class="col-sm hall"></div>
+					<div id="3" class="col-sm hall"></div>
+					<div id="4" class="col-sm hall"></div>
+					<div id="5" class="col-sm hall"></div>
+					<div id="6" class="col-sm hall"></div>
+					<div id="7" class="col-sm hall"></div>
+			</div>
+	</div>
+		<div style="margin-bottom: 200px;" id="container" class="container">
+			<div class="center">
+				<h2 id="dist-header" class="floor-heading">Запазване на зала</h2>
+			</div>
 			<form id="reservation-form">
-				<h1 id="reservation-heading">Запазване на зала</h1>
-				
-				<label for="hall">Номер на зала:</label>
-                <input id="hall" type="text" name="hall" placeholder="Номер на зала">
-				
-				<label for="subject">Предмет:</label>
-				<select id="subject" name="subject"></select>
-				
-                <label for="date">Дата:</label>
-                <input id="date" type="date" name="date" placeholder="Дата">
-
-                <label for="hour">Oт:</label>
-				<select id="hour-from" name="hour-from"></select>
-				
-				<label for="hour">До:</label>
-                <select id="hour-to" name="hour-to"></select>
-
-				<button type="submit">Запази</button>
-				<p id="user-message"></p>
+				<div class="row">
+					<div class="form-group">
+						<label for="hall">Номер на зала:</label>
+						<input id="hall" type="text" name="hall" placeholder="Номер на зала" readonly>
+					</div>
+					<div class="form-group">
+						<label for="subject">Предмет:</label>
+						<select id="subject" name="subject"></select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label for="date">Дата:</label>
+						<input id="date" type="date" name="date" placeholder="Дата">
+					</div>
+					<div class="form-group">
+						<label for="hour">Oт:</label>
+						<select id="hour-from" name="hour-from"></select>
+					</div>
+					<div class="form-group">
+						<label for="hour">До:</label>
+						<select id="hour-to" name="hour-to"></select>
+					</div>
+				</div>
 			</form>
 		</div>
 	</body>
 </html> 
+
+<!-- <form id="reservation-form">
+	<h1 id="reservation-heading">Запазване на зала</h1>
+	<label for="hall">Номер на зала:</label>
+					<input id="hall" type="text" name="hall" placeholder="Номер на зала" readonly>
+	
+	<label for="subject">Предмет:</label>
+	<select id="subject" name="subject"></select>
+	
+					<label for="date">Дата:</label>
+					<input id="date" type="date" name="date" placeholder="Дата">
+
+					<label for="hour">Oт:</label>
+	<select id="hour-from" name="hour-from"></select>
+	
+	<label for="hour">До:</label>
+					<select id="hour-to" name="hour-to"></select>
+
+	<button type="submit">Запази</button>
+	<p id="user-message"></p>
+</form> -->

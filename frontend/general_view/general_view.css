@@ -169,9 +169,9 @@ body {
 }
 
 #dist-min {
-    margin-left: 3rem;
     margin-top: 10px;
     font-size: 20px;
+    margin-left: 25px;
 }
 
 #dist-label {
