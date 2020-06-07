@@ -32,7 +32,7 @@ body {
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-.floor-heading {
+.search-text {
     font-size: 30px;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
@@ -60,7 +60,7 @@ body {
 .row {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .col-sm {
@@ -175,5 +175,9 @@ body {
 }
 
 #dist-label {
+    font-size: 20px;
+}
+
+#schedule-label {
     font-size: 20px;
 }

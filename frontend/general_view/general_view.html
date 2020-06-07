@@ -90,9 +90,25 @@
                 <div id="7" class="col-sm hall"></div>
             </div>
         </div>
+        <div class="container">
+            <div class="center">
+                <h2 id="schedule-header" class="search-text">Търсене на график</h2>
+            </div>
+            <div class="row">
+                <div>
+                    <div id="dist-group">
+                        <label for="date">Дата:</label>
+                        <input id="date" name="date" type="date">
+                        <label for="hour">Час:</label>
+                        <select id="hour" name="hout"></select>
+                    </div>
+                </div>
+                <button id="search-btn" class="go-btn">Търсене</button>
+            </div>
+        </div>
         <div class="container distance">
             <div class="center">
-                <h2 id="dist-header" class="floor-heading">Търсене на разстояние в минути между две зали</h2>
+                <h2 id="dist-header" class="search-text">Търсене на разстояние в минути между две зали</h2>
             </div>
             <div class="row">
                 <div>
@@ -100,12 +116,12 @@
                         Въведете номерата на две от залите
                     </label>
                     <div id="dist-group">
-                        <label for="from">ОТ</label>
+                        <label for="from">От зала:</label>
                         <input id="from" type="number">
-                        <label for="to">ДО</label>
+                        <label for="to">До зала:</label>
                         <input id="to" type="number">
                     </div>
-                    <p id="dist-min" class="floor-heading"></p>
+                    <p id="dist-min" class="search-text"></p>
                 </div>
                 <button id="search-btn" class="go-btn">Търсене</button>
             </div>
