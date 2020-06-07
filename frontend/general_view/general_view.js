@@ -1,6 +1,8 @@
 
 //#region Constants
-  const TEACHER_ROLE = 2;
+
+  const TEACHER_ROLE = '2';
+
 //#endregion
 
 //#region DOM elements
@@ -11,6 +13,8 @@ const floor3 = document.getElementById('f3');
 const block2 = document.getElementById('bl2');
 const floorHeader = document.getElementById('floor-header');
 const goBtn = document.getElementById('go-btn');
+const searchBtn = document.getElementById('search-btn');
+const distMessage = document.getElementById('dist-min');
 
 //#endregion
 
@@ -48,9 +52,21 @@ document.getElementById('bl2-b').addEventListener("click", () => {
   block2.style.display = 'block';
 });
 
-goBtn.addEventListener("click", () => {
-  location.replace("../hall_reservation/hall_reservation.html");
+goBtn.addEventListener('click', () => {
+  location.replace('../hall_reservation/hall_reservation.html');
 });
+
+searchBtn.addEventListener('click', () => {
+  const fromHall = document.getElementById('from').value;
+  const toHall = document.getElementById('to').value;
+
+  const halls = {
+    fromHall: fromHall, 
+    toHall: toHall
+  };
+
+  getDistance(halls);
+})
 
 //#endregion
 
@@ -75,10 +91,30 @@ function checkUser() {
       if (!data.value) {
         location.replace("../login/login.html");
       } else {
-        console.log(data);
         if (data.value.role !== TEACHER_ROLE) {
           hideGoBtn();
         }
+      }
+    });
+}
+
+function getDistance(halls) {
+  const data = new FormData();
+  data.append('halls', JSON.stringify(halls));
+
+  const init = {
+    method: 'POST',
+    body: data
+  }
+  fetch('../../backend/endpoints/get_distance.php', init)
+    .then( (response) => {
+      return response.json();
+    })
+    .then( (data) => {
+      if (data.success === true) {
+        showDistance(data.value);
+      } else {
+        showDistanceError();
       }
     });
 }
@@ -98,6 +134,17 @@ function placeHalls(halls) {
 
 function hideGoBtn() {
   goBtn.style.display = 'none';
+}
+
+function showDistance(mins) {
+  distMessage.style.color = '#ff8000';
+  min = (mins === 1) ? 'минута' : 'минути';
+  distMessage.innerText = 'Търсеното разстояние е ' + mins + ' ' + min + '.'; 
+}
+
+function showDistanceError() {
+  distMessage.innerText = 'Въведените номера на зали са некоректни';
+  distMessage.style.color = 'red';
 }
 
 //#endregion

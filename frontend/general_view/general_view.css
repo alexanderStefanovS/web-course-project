@@ -36,6 +36,11 @@ body {
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
+#floor-header {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
 .container {
     position: relative;
     width: 75%;
@@ -44,16 +49,17 @@ body {
 }
 
 .distance {
-    border: solid;
+    /* border: solid;
     border-color: black;
     border-width: 1px;
-    height: 300px;
+    height: 300px; */
     margin-bottom: 300px;
 }
 
 .row {
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-around;
 }
 
 .col-sm {
@@ -91,7 +97,7 @@ body {
     color: white;
 }
 
-#go-btn {
+.go-btn {
     background-color: #919089;
     color: white;
     margin-right: 15px;
@@ -109,13 +115,9 @@ body {
     display: none;
 }
 
-#dist-header {
-    margin-top: 0;
-}
-
 .container input {
-    width: 200px;
-    height: 50px;
+    width: 20%;
+    height: 100%;
     background-color: #f2f2f2;
     font-size: x-large;
 }
@@ -127,4 +129,21 @@ body {
 
 #dist-group {
     margin-top: 20px;
+}
+
+#search-btn {
+    height: 50px;
+    width: 150px;
+    margin-top: 45px;
+    font-size: large;
+}
+
+#dist-min {
+    margin-left: 3rem;
+    margin-top: 10px;
+}
+
+#dist-label {
+    font-size: 30px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
