@@ -40,11 +40,6 @@ body {
     background-color: #ff9615;
 }
 
-.required:after {
-    content:" *";
-    color: red;
-}
-
 #register-message {
     font-size: 14px;
     font-style: italic;

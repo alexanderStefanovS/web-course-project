@@ -70,7 +70,6 @@ if (!isset($_SESSION['username'])) {
         }
         
         if($doExist == false) {
-            var_dump($doExist);
             // for every hour reserve hall
             for($x = $hourFrom; $x < $hourTo; $x++) {
 
