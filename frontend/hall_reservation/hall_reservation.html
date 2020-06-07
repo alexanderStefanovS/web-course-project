@@ -92,12 +92,12 @@
 					<div id="7" class="col-sm hall"></div>
 			</div>
 	</div>
-		<div style="margin-bottom: 200px;" id="container" class="container">
-			<div class="center">
-				<h2 id="dist-header" class="floor-heading">Запазване на зала</h2>
-			</div>
-			<form id="reservation-form">
-				<div class="row">
+	<div class="center">
+		<h2 id="res-header" class="floor-heading">Запазване на зала</h2>
+	</div>
+		<div style="margin-bottom: 200px;" id="container" class="form-container">
+			<form id="reservation-form" class="center">
+				<div class="form-row">
 					<div class="form-group">
 						<label for="hall">Номер на зала:</label>
 						<input id="hall" type="text" name="hall" placeholder="Номер на зала" readonly>
@@ -107,7 +107,7 @@
 						<select id="subject" name="subject"></select>
 					</div>
 				</div>
-				<div class="row">
+				<div class="form-row">
 					<div class="form-group">
 						<label for="date">Дата:</label>
 						<input id="date" type="date" name="date" placeholder="Дата">
@@ -120,8 +120,10 @@
 						<label for="hour">До:</label>
 						<select id="hour-to" name="hour-to"></select>
 					</div>
+					<button type="submit">Запази</button>
 				</div>
 			</form>
+			<p id="user-message"></p>
 		</div>
 	</body>
 </html> 

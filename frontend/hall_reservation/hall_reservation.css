@@ -49,14 +49,6 @@ body {
   padding: 15px;
 }
 
-.distance {
-  /* border: solid;
-  border-color: black;
-  border-width: 1px;
-  height: 300px; */
-  margin-bottom: 300px;
-}
-
 .row {
   display: flex;
   flex-flow: row wrap;
@@ -80,8 +72,6 @@ body {
 
   background:#ff8000;
   color: white;
-  /* font-weight: bold;
-  font-size: 25px; */
   text-align: center;
 }
 
@@ -144,18 +134,6 @@ body {
   display: none;
 }
 
-/* .container input {
-  width: 20%;
-  height: 100%;
-  background-color: #f2f2f2;
-  font-size: 20px;
-}
-
-.container label {
-  font-size: 20px;
-  margin-left: 25px;
-} */
-
 #dist-group {
   margin-top: 20px;
 }
@@ -180,16 +158,34 @@ body {
 
 .form-group {
   margin-top: 10px;
+  margin-right: 20px;
 }
 
 .form-group label {
   display: block;
 }
 
-.container input {
+.form-container input {
   background-color: #f2f2f2;
 }
 
-.container select {
+.form-container select {
   background-color: #f2f2f2;
+}
+
+.form-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.form-container {
+  position: relative;
+  width: 50%;
+  left: 25%;
+  padding: 15px;
+}
+
+#res-header {
+  margin-bottom: 0;
 }
