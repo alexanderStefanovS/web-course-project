@@ -32,11 +32,6 @@ body {
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-.search-text {
-    font-size: 30px;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-}
-
 #floor-header {
     margin-bottom: 0;
     margin-top: 10px;
@@ -56,7 +51,7 @@ body {
 .row {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .col-sm {
@@ -76,8 +71,6 @@ body {
 
     background:#ff8000;
     color: white;
-    /* font-weight: bold;
-    font-size: 25px; */
     text-align: center;
 }
 
@@ -145,6 +138,14 @@ body {
     margin-top: 25px;
 }
 
+.ml {
+    margin-left: 10px;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
 #f2, #f3, #bl2 {
     display: none;
 }
@@ -156,4 +157,28 @@ body {
 
 .group input, select {
     height: 30px;
+}
+
+#from, #to {
+    height: 25px;
+}
+
+.search-btn {
+    width: 115px;
+    height: 45px;
+    background-color: #ff8000;
+    border: 1px solid #ff8000;
+    color: #fff;
+}
+
+.search-btn:hover {
+    background-color: #fff;
+    border: 1px solid #ff8000;
+    color: #ff8000;
+    transition: 0.8s;
+}
+
+.search-text {
+    font-size: 30px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }

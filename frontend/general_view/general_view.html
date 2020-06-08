@@ -90,28 +90,24 @@
                 <div id="7" class="col-sm hall"></div>
             </div>
         </div>
-        <div class="container">
-            <div class="center">
-                <h2 id="schedule-header" class="search-text">Търсене на график</h2>
-            </div>
+        <div class="container center">
+            <h2 id="schedule-header" class="search-text">Търсене на график</h2>
             <div class="row">
                 <div class="group">
                     <label for="date">Дата:</label>
                     <input id="date" name="date" type="date">
                     <label for="hour">Час:</label>
                     <select id="hour" name="hout"></select>
-                    <p id="schedule-message" "></p>
                 </div>
                 <div>
-                    <button id="search-schedule-btn" class="nav-btn">Търсене</button>
-                    <button id="csv-export-btn" class="nav-btn">Експорт в CSV</button>
+                    <button id="search-schedule-btn" class="ml search-btn">Търсене</button>
+                    <button id="csv-export-btn" class="search-btn">Експорт в CSV</button>
                 </div>
             </div>
+            <p id="schedule-message"></p>
         </div>
-        <div class="container distance">
-            <div class="center">
-                <h2 id="dist-header" class="search-text">Търсене на разстояние в минути между две зали</h2>
-            </div>
+        <div class="container distance center">
+            <h2 id="dist-header" class="search-text mt-0">Търсене на разстояние в минути между две зали</h2>
             <div class="row">
                 <div class="group">
                     <label for="from">От зала:</label>
@@ -119,9 +115,9 @@
                     <label for="to">До зала:</label>
                     <input id="to" type="number">
                 </div>
-                <button id="search-dist-btn" class="nav-btn">Търсене</button>
+                <button id="search-dist-btn" class="ml search-btn">Търсене</button>
             </div>
-            <p id="dist-min" class="search-text"></p>
+            <p id="dist-min"></p>
         </div>
         <script src="general_view.js"></script>
     </body>
