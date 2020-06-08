@@ -8,7 +8,7 @@
     <body>
         <div class="header d-flex">
             <h2 class="page-heading">Система за управление на графика по стаи във ФМИ</h2>
-            <button id="go-btn" class="redir-btn">Запази<br>зала</button>
+            <button id="go-btn" class="go-btn">Запази<br>зала</button>
         </div>
         <div class="btn-group">
             <button id="f1-b" class="nav-btn mr">ПЪРВИ ЕТАЖ</button>
@@ -100,28 +100,25 @@
                     <input id="date" name="date" type="date">
                     <label for="hour">Час:</label>
                     <select id="hour" name="hout"></select>
-                    <p id="schedule-message" class="search-text"></p>
+                    <p id="schedule-message" "></p>
                 </div>
-                <button id="search-schedule-btn" class="go-btn">Търсене</button>
+                <button id="search-schedule-btn">Търсене</button>
             </div>
         </div>
         <div class="container distance">
             <div class="center">
-                <h2 id="dist-header" class="search-text">Търсене на разстояние в минути между две зали</h2>
+                <h2 id="dist-header" >Търсене на разстояние в минути между две зали</h2>
             </div>
             <div class="row">
-                <div>
-                    <div class="group">
-                        <label for="from">От зала:</label>
-                        <input id="from" type="number">
-                        <label for="to">До зала:</label>
-                        <input id="to" type="number">
-                        <p id="dist-min" class="search-text"></p>
-                    </div>
-                    <p id="dist-min" class="search-text"></p>
+                <div class="group">
+                    <label for="from">От зала:</label>
+                    <input id="from" type="number">
+                    <label for="to">До зала:</label>
+                    <input id="to" type="number">
                 </div>
-                <button id="search-dist-btn" class="go-btn">Търсене</button>
+                <button id="search-dist-btn">Търсене</button>
             </div>
+            <p id="dist-min" class="search-text"></p>
         </div>
         <script src="general_view.js"></script>
     </body>

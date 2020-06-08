@@ -123,19 +123,14 @@ body {
 }
 
 .go-btn {
-    background-color: #919089;
-    color: white;
-    margin-right: 15px;
-}
-
-.redir-btn {
     border:#ff8000;
     background-color:white;
     color:#ff8000;
     margin-right: 15px;
+    margin-left: 15px;
 }
   
-.redir-btn:hover {
+.go-btn:hover {
     border:white;
     background-color:#ff8000;
     color:white;
@@ -154,56 +149,7 @@ body {
     display: none;
 }
 
-.container input {
-    width: 20%;
-    height: 100%;
-    background-color: #f2f2f2;
-    font-size: 20px;
-}
-
-.container label {
-    font-size: 20px;
-    margin-left: 25px;
-}
-
 .group {
     margin-top: 20px;
 }
 
-#search-dist-btn, #search-schedule-btn {
-    height: 45px;
-    width: 130px;
-    margin-top: 10px;
-    font-size: 20px;
-    margin-right: 120px;
-}
-
-#dist-min, #schedule-message {
-    margin-top: 10px;
-    font-size: 20px;
-    margin-left: 25px;
-}
-
-#dist-label {
-    font-size: 20px;
-}
-
-#schedule-label {
-    font-size: 20px;
-}
-
-.search-text {
-    margin-bottom: 5px;
-}
-
-#date, #hour {
-    width: 40%;
-    height: auto;
-    font-size: 15px;
-}
-
-#hour {
-    background-color: #f2f2f2;
-    height: 32px;
-    width: 20%;
-}
