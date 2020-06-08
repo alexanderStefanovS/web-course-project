@@ -56,7 +56,7 @@ if(!$schedules) {
 else {
     echo json_encode([
         'success' => true,
-        'message' => "Списък от всички графици.",
+        'message' => "Данните са намерени.",
         'value' => $schedules,
     ]);
 }

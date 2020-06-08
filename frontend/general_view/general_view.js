@@ -18,6 +18,7 @@ const distMessage = document.getElementById('dist-min');
 const scheduleBtn = document.getElementById('search-schedule-btn');
 const scheduleMessage = document.getElementById('schedule-message');
 const hour = document.getElementById('hour');
+const exportBtn = document.getElementById('csv-export-btn');
 
 //#endregion
 
@@ -95,6 +96,24 @@ scheduleBtn.addEventListener('click', () => {
   getSchedule(schedule);
 })
 
+exportBtn.addEventListener('click', () => {
+  const date = document.getElementById('date').value;
+  const hour = document.getElementById('hour').value;
+
+  if (!date || !hour) {
+    scheduleMessage.innerText = 'Моля, въведете дата и час.';
+    scheduleMessage.style.color = 'red';
+    return;
+  }
+
+  const schedule = {
+    date: date, 
+    hour: hour,
+  };
+
+  exportCSV(schedule);
+})
+
 //#endregion
 
 //#region Services
@@ -158,7 +177,7 @@ function getSchedule(schedule) {
     .then( (data) => {
       if (data.success === true) {
         placeHalls(halls);
-        showSearchScheduleMessage()
+        showSearchScheduleMessage(data.message);
         showSearchScheduleData(data.value);
       } else {
         showSearchScheduleError(data.message);
@@ -173,6 +192,19 @@ function getHourOptions() {
       option.value = i;
       hour.appendChild(option);
   }
+}
+
+function exportCSV(schedule) {
+  fetch('../../backend/endpoints/export_csv.php', {
+    method: 'POST',
+    body: JSON.stringify(schedule),
+  })
+    .then( (response) => {
+      return response.blob();
+    })
+    .then( (data) => {
+      download(data);
+    });
 }
 
 // #endregion
@@ -208,8 +240,8 @@ function showSearchScheduleError(message) {
   distMessage.style.color = 'red';
 }
 
-function showSearchScheduleMessage() {
-  scheduleMessage.innerText = 'Данните са намерени';
+function showSearchScheduleMessage(message) {
+  scheduleMessage.innerText = message;
   scheduleMessage.style.color = '#ff8000';
 }
 
