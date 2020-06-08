@@ -15,6 +15,9 @@ const floorHeader = document.getElementById('floor-header');
 const goBtn = document.getElementById('go-btn');
 const searchBtn = document.getElementById('search-btn');
 const distMessage = document.getElementById('dist-min');
+const scheduleBtn = document.getElementById('search-schedule-btn');
+const scheduleMessage = document.getElementById('schedule-message');
+const hour = document.getElementById('hour');
 
 //#endregion
 
@@ -74,6 +77,24 @@ searchBtn.addEventListener('click', () => {
   getDistance(halls);
 })
 
+scheduleBtn.addEventListener('click', () => {
+  const date = document.getElementById('date').value;
+  const hour = document.getElementById('hour').value;
+
+  if (!date || !hour) {
+    scheduleMessage.innerText = 'Моля, въведете номерата и на двете зали';
+    scheduleMessage.style.color = 'red';
+    return;
+  }
+
+  const schedule = {
+    date: date, 
+    hour: hour,
+  };
+
+  getSchedule(schedule);
+})
+
 //#endregion
 
 //#region Services
@@ -125,6 +146,32 @@ function getDistance(halls) {
     });
 }
 
+function getSchedule(schedule) {
+  fetch('../../backend/endpoints/get_schedule.php', {
+    method: 'POST',
+    body: JSON.stringify(schedule),
+  })
+    .then( (response) => {
+      return response.json();
+    })
+    .then( (data) => {
+      if (data.success === true) {
+        
+      } else {
+        
+      }
+    });
+}
+
+function getHourOptions() {
+  for(var i = 7; i <= 20; i ++){
+      var option = document.createElement('option');
+      option.text = i + ":00 ч.";
+      option.value = i;
+      hour.appendChild(option);
+  }
+}
+
 // #endregion
 
 //#region Functions
@@ -157,3 +204,5 @@ function showDistanceError() {
 
 checkUser();
 getHalls();
+
+getHourOptions();
