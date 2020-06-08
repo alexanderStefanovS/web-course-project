@@ -198,13 +198,20 @@ function exportCSV(schedule) {
   fetch('../../backend/endpoints/export_csv.php', {
     method: 'POST',
     body: JSON.stringify(schedule),
-  })
-    .then( (response) => {
-      return response.blob();
+  }).then( (response) => {
+       return response.text();
     })
     .then( (data) => {
-      download(data);
+      download('data.csv', data);
     });
+}
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  element.click();
 }
 
 // #endregion

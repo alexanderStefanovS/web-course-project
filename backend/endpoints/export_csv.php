@@ -45,8 +45,8 @@ else {
         ]);
     }
 
-    header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename=schedule.csv"');
+    header("Content-Type: text/csv; charset=utf-8");
+    header("Content-Disposition: attachment; filename=schedule.csv");
     $output = fopen('php://output', 'w');
     fputcsv($output, array('ID', 'Date', 'Hour', 'Number', 'Lastname',
         'Course', 'Specialty'));
