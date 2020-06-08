@@ -42,6 +42,7 @@ function getTeacherSubjects() {
 //#endregion
 
 //#region Functions
+
 function getTimeOptionsFrom() {
     var hourFrom = document.getElementById('hour-from');
     for(var i = 7; i <= 20; i ++){
@@ -119,6 +120,7 @@ function placeHalls(halls) {
     const floor3 = document.getElementById('f3');
     const block2 = document.getElementById('bl2');
     const floorHeader = document.getElementById('floor-header');
+    const goBtn = document.getElementById('go-btn');
 
 //#endregion
 
@@ -202,6 +204,10 @@ const onFormSubmitted = event => {
 }
 
 document.getElementById('reservation-form').addEventListener('submit', onFormSubmitted);
+
+goBtn.addEventListener('click', () => {
+    location.replace("../general_view/general_view.html");
+});
 
 //#endregion
 
