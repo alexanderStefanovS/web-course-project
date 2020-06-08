@@ -14,7 +14,6 @@ const block2 = document.getElementById('bl2');
 const floorHeader = document.getElementById('floor-header');
 const goBtn = document.getElementById('go-btn');
 const searchDistBtn = document.getElementById('search-dist-btn');
-const searchScheduleBtn = document.getElementById('search-schedule-btn');
 const distMessage = document.getElementById('dist-min');
 const scheduleBtn = document.getElementById('search-schedule-btn');
 const scheduleMessage = document.getElementById('schedule-message');
@@ -65,7 +64,7 @@ searchDistBtn.addEventListener('click', () => {
   const toHall = document.getElementById('to').value;
 
   if (!fromHall || !toHall) {
-    distMessage.innerText = 'Моля, въведете номерата и на двете зали';
+    distMessage.innerText = 'Моля, въведете номерата и на двете зали.';
     distMessage.style.color = 'red';
     return;
   }
@@ -83,7 +82,7 @@ scheduleBtn.addEventListener('click', () => {
   const hour = document.getElementById('hour').value;
 
   if (!date || !hour) {
-    scheduleMessage.innerText = 'Моля, въведете номерата и на двете зали';
+    scheduleMessage.innerText = 'Моля, въведете дата и час.';
     scheduleMessage.style.color = 'red';
     return;
   }
@@ -159,7 +158,7 @@ function getSchedule(schedule) {
       if (data.success === true) {
         
       } else {
-        
+        showSearchScheduleError(data.message);
       }
     });
 }
@@ -198,6 +197,11 @@ function showDistance(mins) {
 
 function showDistanceError() {
   distMessage.innerText = 'Въведените номера на зали са некоректни';
+  distMessage.style.color = 'red';
+}
+
+function showSearchScheduleError(message) {
+  scheduleMessage.innerText = message;
   distMessage.style.color = 'red';
 }
 

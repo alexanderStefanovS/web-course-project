@@ -46,11 +46,19 @@ catch (PDOException $e) {
 }
 
 $schedules = getSchedules($connection, $date, $hour);
-
-echo json_encode([
-    'success' => true,
-    'message' => "Списък от всички предмети.",
-    'value' => $schedules,
-]);
+if(!$schedules) {
+    echo json_encode([
+        'success' => false,
+        'message' => "Няма намерени графици.",
+        'value' => null,
+    ]);
+}
+else {
+    echo json_encode([
+        'success' => true,
+        'message' => "Списък от всички графици.",
+        'value' => $schedules,
+    ]);
+}
 
 ?>
