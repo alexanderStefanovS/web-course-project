@@ -76,7 +76,7 @@ body {
   text-align: center;
 }
 
-.hall:hover {
+.hall_hover:hover {
   background: #fff;
   color: #ff8000;
   transition: 0.8s;

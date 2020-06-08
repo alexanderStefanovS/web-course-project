@@ -39,9 +39,25 @@ class Reservation {
         }
     }
 
+    private function checkHall($connection): void {
+        $selectStatement = $connection->prepare("SELECT * FROM `halls` WHERE id = :id");
+        
+        $selectStatement->execute([
+            'id' => $this->halls_id,
+            ]);
+
+        $errorMessage = "Зала от този тип не може да бъде запазвана.";
+        $hall = $selectStatement->fetch();
+        if ($hall['type'] == "WC" || $hall['type'] == "книжарница" || $hall['type'] == "библиотека") {
+            throw new Exception($errorMessage);
+        }
+    }
+
     public function checkReservation(): void {
         $database = new DB();
         $connection = $database->getConnection();
+
+        $this->checkHall($connection);
 
         $selectStatement = $connection->prepare("SELECT * FROM `halls_schedule` WHERE date = :date 
             AND hour = :hour AND halls_id = :halls_id");
