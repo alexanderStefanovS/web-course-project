@@ -105,6 +105,7 @@ function getHalls() {
       return response.json();
     })
     .then(data => {
+      halls = data.value;
       placeHalls(data.value);
     });
 }
@@ -156,7 +157,9 @@ function getSchedule(schedule) {
     })
     .then( (data) => {
       if (data.success === true) {
-        
+        placeHalls(halls);
+        showSearchScheduleMessage()
+        showSearchScheduleData(data.value);
       } else {
         showSearchScheduleError(data.message);
       }
@@ -205,9 +208,26 @@ function showSearchScheduleError(message) {
   distMessage.style.color = 'red';
 }
 
+function showSearchScheduleMessage() {
+  scheduleMessage.innerText = 'Данните са намерени';
+  scheduleMessage.style.color = '#ff8000';
+}
+
+function showSearchScheduleData(data) {
+  data.forEach( (item) => {
+    const element = document.getElementById(item.hallNumber);
+    if (element) {
+      element.innerHTML += "<br>" + item.specialty + ", " + item.course + "<br>" + item.subjectName + "<br>" 
+      + item.teacherFirstname + "<br>" + item.teacherLastname;
+    }
+  });
+}
+
 //#endregion
 
 checkUser();
+
+let halls;
 getHalls();
 
 getHourOptions();

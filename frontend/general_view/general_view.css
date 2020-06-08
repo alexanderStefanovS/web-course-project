@@ -90,7 +90,7 @@ body {
 .nav-btn {
     width: 155px; 
     height: 50px;
-    border: 1px solid #ff8000;
+    border: 1.5px solid #ff8000;
     background: none;
     cursor: pointer;
     transition: 0.8s;
@@ -161,10 +161,10 @@ body {
     width: 130px;
     margin-top: 10px;
     font-size: 20px;
-    margin-right: 150px;
+    margin-right: 120px;
 }
 
-#dist-min {
+#dist-min, #schedule-message {
     margin-top: 10px;
     font-size: 20px;
     margin-left: 25px;
@@ -182,12 +182,14 @@ body {
     margin-bottom: 5px;
 }
 
-select {
-    background-color: #f2f2f2;
-    width: 20%;
-    height: 30px;
+#date, #hour {
+    width: 40%;
+    height: auto;
+    font-size: 15px;
 }
 
-#date, #hour {
-    /* width: 30%; */
+#hour {
+    background-color: #f2f2f2;
+    height: 32px;
+    width: 20%;
 }
