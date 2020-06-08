@@ -102,12 +102,15 @@
                     <select id="hour" name="hout"></select>
                     <p id="schedule-message" "></p>
                 </div>
-                <button id="search-schedule-btn">Търсене</button>
+                <div>
+                    <button id="search-schedule-btn" class="nav-btn">Търсене</button>
+                    <button id="csv-export-btn" class="nav-btn">Експорт в CSV</button>
+                </div>
             </div>
         </div>
         <div class="container distance">
             <div class="center">
-                <h2 id="dist-header" >Търсене на разстояние в минути между две зали</h2>
+                <h2 id="dist-header" class="search-text">Търсене на разстояние в минути между две зали</h2>
             </div>
             <div class="row">
                 <div class="group">
@@ -116,7 +119,7 @@
                     <label for="to">До зала:</label>
                     <input id="to" type="number">
                 </div>
-                <button id="search-dist-btn">Търсене</button>
+                <button id="search-dist-btn" class="nav-btn">Търсене</button>
             </div>
             <p id="dist-min" class="search-text"></p>
         </div>
