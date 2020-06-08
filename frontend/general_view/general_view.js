@@ -19,6 +19,7 @@ const scheduleBtn = document.getElementById('search-schedule-btn');
 const scheduleMessage = document.getElementById('schedule-message');
 const hour = document.getElementById('hour');
 const exportBtn = document.getElementById('csv-export-btn');
+const logoutBtn = document.getElementById('logout-btn');
 
 //#endregion
 
@@ -112,6 +113,10 @@ exportBtn.addEventListener('click', () => {
   };
 
   exportCSV(schedule);
+})
+
+logoutBtn.addEventListener('click', () => {
+  logout();
 })
 
 //#endregion
@@ -222,6 +227,17 @@ function download(filename, csvContent) {
   link.setAttribute("download", filename);
   document.body.appendChild(link);
   link.click();
+}
+
+function logout() {
+  fetch('../../backend/endpoints/logout.php', {
+    method: 'GET'
+  }).then(response=>response.json())
+  .then(response => {
+      if (response.success) {
+          document.location.reload();
+      }
+  });
 }
 
 // #endregion
