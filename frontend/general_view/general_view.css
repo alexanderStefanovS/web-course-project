@@ -50,10 +50,6 @@ body {
 }
 
 .distance {
-    /* border: solid;
-    border-color: black;
-    border-width: 1px;
-    height: 300px; */
     margin-bottom: 300px;
 }
 
@@ -156,16 +152,16 @@ body {
     margin-left: 25px;
 }
 
-#dist-group {
+.group {
     margin-top: 20px;
 }
 
-#search-btn {
+#search-dist-btn, #search-schedule-btn {
     height: 45px;
     width: 130px;
-    margin-top: 30px;
+    margin-top: 10px;
     font-size: 20px;
-    margin-right: 40px;
+    margin-right: 150px;
 }
 
 #dist-min {
@@ -180,4 +176,18 @@ body {
 
 #schedule-label {
     font-size: 20px;
+}
+
+.search-text {
+    margin-bottom: 5px;
+}
+
+select {
+    background-color: #f2f2f2;
+    width: 20%;
+    height: 30px;
+}
+
+#date, #hour {
+    /* width: 30%; */
 }

@@ -13,7 +13,8 @@ const floor3 = document.getElementById('f3');
 const block2 = document.getElementById('bl2');
 const floorHeader = document.getElementById('floor-header');
 const goBtn = document.getElementById('go-btn');
-const searchBtn = document.getElementById('search-btn');
+const searchDistBtn = document.getElementById('search-dist-btn');
+const searchScheduleBtn = document.getElementById('search-schedule-btn');
 const distMessage = document.getElementById('dist-min');
 
 //#endregion
@@ -56,7 +57,7 @@ goBtn.addEventListener('click', () => {
   location.replace('../hall_reservation/hall_reservation.html');
 });
 
-searchBtn.addEventListener('click', () => {
+searchDistBtn.addEventListener('click', () => {
   const fromHall = document.getElementById('from').value;
   const toHall = document.getElementById('to').value;
 
