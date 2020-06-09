@@ -48,7 +48,7 @@ class Reservation {
 
         $errorMessage = "Зала от този тип не може да бъде запазвана.";
         $hall = $selectStatement->fetch();
-        if ($hall['type'] == "WC" || $hall['type'] == "книжарница" || $hall['type'] == "библиотека") {
+        if ($hall['type'] == "WC" || $hall['type'] == "книжарница" || $hall['type'] == "библиотека" || $hall['type'] == "канцелария") {
             throw new Exception($errorMessage);
         }
     }

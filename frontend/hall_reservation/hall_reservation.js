@@ -108,7 +108,7 @@ function placeHalls(halls) {
         if (element) {
             element.innerHTML = hall.number + "<br>" + hall.type;
         }
-        if (hall.type === "WC" || hall.type === "книжарница" || hall.type === "библиотека") {
+        if (hall.type === "WC" || hall.type === "книжарница" || hall.type === "библиотека" || hall.type === "канцелария") {
             element.disabled = true;
             element.classList.remove("hall_hover");
         }
