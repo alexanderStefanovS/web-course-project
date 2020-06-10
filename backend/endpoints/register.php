@@ -1,9 +1,9 @@
 <?php
 
 $phpInput = json_decode(file_get_contents('php://input'), true);
-require_once "./User.php";
+require_once "../models/User.php";
 
-$user = new User($phpInput['username'], $phpInput['password'], $phpInput['email'], $phpInput['firstname'],
+$user = new User(null, $phpInput['username'], $phpInput['password'], $phpInput['email'], $phpInput['firstname'],
 				$phpInput['lastname'], $phpInput['role']);
 
 

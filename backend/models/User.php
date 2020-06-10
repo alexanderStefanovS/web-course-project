@@ -45,7 +45,7 @@ class User {
 	}
 	
 	public function storeInDb(): void {
-		require_once "./DB.php";
+		require_once "../db/DB.php";
 
 		$db = new DB();
 	
@@ -77,6 +77,61 @@ class User {
             }
             throw new Exception($errorMessage);
         }
-    }
+	}
+	
+	private function required($field1, $field2, $field3, $field4, $field5, $field6): bool {
+		return !empty($field1) && !empty($field2) && !empty($field3) && !empty($field4) && !empty($field5) && !empty($field6);
+	}
+	
+	private function validName($field): bool{
+		return strlen($field) >= 2 && strlen($field) <= 45 && (preg_match('/^[\p{Cyrillic}]+[- \']?[\p{Cyrillic}]+$/u', $field) || preg_match('/^[a-zA-Z]+[- \']?[a-zA-Z]+$/', $field));	
+	}
+	
+	private function validEmail($field): bool {
+		return preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $field);
+	}
+
+	private function validUsername($field): bool {
+		return strlen($field) >= 3 && strlen($field) <= 45 && preg_match('/^[a-zA-Z0-9]+([-._]?[a-zA-Z0-9]+)*$/', $field);	
+	}
+	
+	private function validPassword($field): bool {
+		return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{6,30}$/', $field);
+	}
+	
+	private function validRole($field): bool { 
+		return $field === "1" || $field === "2";
+	}
+	
+	 public function validate(): void {
+		
+		if (!$this->required($this->firstname, $this->lastname, $this->email, $this->username, $this->password, $this->role)) {
+			throw new Exception("Моля, попълнете всички задължителни полета.");
+		}
+		
+		if (!$this->validName($this->firstname)) {
+			throw new Exception("Моля, попълнете валидно име.");
+		}
+		
+		if (!$this->validName($this->lastname)) {
+			throw new Exception("Моля, попълнете валиднa фамилия.");
+		}
+		
+		if (!$this->validEmail($this->email)) {
+			throw new Exception("Моля, попълнете валиден имейл.");
+		}
+		
+		if (!$this->validUsername($this->username)) {
+			throw new Exception("Моля, попълнете валидно потребителско име.");
+		}
+		
+		if (!$this->validPassword($this->password)) {
+			throw new Exception("Моля, попълнете валидна парола.");
+		}
+		
+		if (!$this->validRole($this->role)) {
+			throw new Exception("Моля, попълнете валидна роля.");
+		}
+	}
 
 }
