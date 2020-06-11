@@ -46,7 +46,7 @@ body {
     text-align: center;
 }
 
-#register-message i {
+#register-message a {
     color: #ff9615;
 }
 

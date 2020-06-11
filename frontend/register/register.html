@@ -1,0 +1,61 @@
+<html>
+	<head>
+			<meta charset="UTF-8"/>
+			<title>Регистрирация</title>
+			<link href="./register.css" rel="stylesheet"/>
+			<script src="register.js" defer></script>
+	</head>
+	<body>
+		<div id="container">
+			<form id="register-form">
+				<h1 id="register-heading">Регистрирация</h1>
+				
+				<label for="firstname" class="required">Име:</label>
+                <input id="firstname" type="text" name="firstname" placeholder="Име">
+				<p id="errFirstname" class="errorMsg"></p>
+				
+				<label for="lastname" class="required">Фамилия:</label>
+                <input id="lastname" type="text" name="lastname" placeholder="Фамилия">
+				<p id="errLastname" class="errorMsg"></p>
+				
+				<label for="email" class="required">E-mail:</label>
+                <input id="email" type="text" name="email" placeholder="E-mail">
+				<p id="errEmail" class="errorMsg"></p>
+				
+				<label for="username" class="required">Потребителско име:</label>
+                <input id="username" type="text" name="username" placeholder="Потребителско име">
+				<p id="errUsername" class="errorMsg"></p>
+				
+				<label for="password" class="required">Парола:</label>
+                <input id="password" type="password" name="password" placeholder="Парола">
+				<p id="errPassword" class="errorMsg"></p>
+				
+				<fieldset id="roles">
+						<legend class="required">Роля</legend>
+
+						<input type="radio" id="student" name="role" value="1">
+						<label for="student">Студент</label><br>
+						
+						<input type="radio" id="teacher" name="role" value="2">
+						<label for="teacher">Преподавател</label>
+						
+				</fieldset>
+				
+				<p id="information" class="required">Задължителни полета</p>
+				
+				<button type="submit">Регистрирай се</button>
+				<p id="user-message"></p>
+				
+			</form>
+		</div>
+		<div id="successful-registration" class="success">
+			<div class="success-content">
+			<div class="success-message">
+			<span class="login">Вход &rArr;</span>
+			<h3>Успешна регистрация. Вече можете да влезете в своя акаунт чрез въвеждане на потребителско име и парола.</h3>
+		</div>
+  </div>
+
+</div>
+	</body>
+</html> 

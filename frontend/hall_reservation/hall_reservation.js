@@ -104,27 +104,28 @@ function setMinDate() {
 
 function placeHalls(halls) {
     halls.forEach( (hall) => {
-      const element = document.getElementById(hall.number);
-      if (element) {
-        element.innerHTML = hall.number + "<br>" + hall.type;
-      }
+        const element = document.getElementById(hall.number);
+        if (element) {
+            element.innerHTML = hall.number + "<br>" + hall.type;
+        }
+        if (hall.type === "WC" || hall.type === "книжарница" || hall.type === "библиотека" || hall.type === "канцелария") {
+            element.disabled = true;
+            element.classList.remove("hall_hover");
+        }
     });
   }
+
 
 //#endregion
 
 //#region DOM elements
 
-    const floor1 = document.getElementById('f1');
-    const floor2 = document.getElementById('f2');
-    const floor3 = document.getElementById('f3');
-    const block2 = document.getElementById('bl2');
-    const floorHeader = document.getElementById('floor-header');
-    const goBtn = document.getElementById('go-btn');
-
-//#endregion
-
-//#region DOM events
+const floor1 = document.getElementById('f1');
+const floor2 = document.getElementById('f2');
+const floor3 = document.getElementById('f3');
+const block2 = document.getElementById('bl2');
+const floorHeader = document.getElementById('floor-header');
+const goBtn = document.getElementById('go-btn');
 
 document.querySelectorAll('.hall').forEach(hall => {
     hall.addEventListener('click', () => {

@@ -7,15 +7,15 @@ class Reservation {
     public $id;
     public $date;
     public $hour;
-    public $users_subjects_id;
-    public $halls_id;
+    public $usersSubjectsId;
+    public $hallsId;
 
-    function __construct($id, $date, $hour, $users_subjects_id, $halls_id) {
+    function __construct($id, $date, $hour, $usersSubjectsId, $hallsId) {
         $this->id = $id;
         $this->date = $date;
         $this->hour = $hour;
-        $this->users_subjects_id = $users_subjects_id;
-        $this->halls_id = $halls_id;
+        $this->usersSubjectsId = $usersSubjectsId;
+        $this->hallsId = $hallsId;
     }
 
     public function storeInDb(): void {
@@ -29,8 +29,8 @@ class Reservation {
         $insertResult = $insertStatement->execute([
                 'date' => $this->date,
 				'hour' => $this->hour,
-				'users_subjects_id' => $this->users_subjects_id,
-				'halls_id' => $this->halls_id,
+				'users_subjects_id' => $this->usersSubjectsId,
+				'halls_id' => $this->hallsId,
             ]);
 		
         if (!$insertResult) {
@@ -39,9 +39,25 @@ class Reservation {
         }
     }
 
+    private function checkHall($connection): void {
+        $selectStatement = $connection->prepare("SELECT * FROM `halls` WHERE id = :id");
+        
+        $selectStatement->execute([
+            'id' => $this->hallsId,
+            ]);
+
+        $errorMessage = "Зала от този тип не може да бъде запазвана.";
+        $hall = $selectStatement->fetch();
+        if ($hall['type'] == "WC" || $hall['type'] == "книжарница" || $hall['type'] == "библиотека" || $hall['type'] == "канцелария") {
+            throw new Exception($errorMessage);
+        }
+    }
+
     public function checkReservation(): void {
         $database = new DB();
         $connection = $database->getConnection();
+
+        $this->checkHall($connection);
 
         $selectStatement = $connection->prepare("SELECT * FROM `halls_schedule` WHERE date = :date 
             AND hour = :hour AND halls_id = :halls_id");
@@ -49,7 +65,7 @@ class Reservation {
         $result = $selectStatement->execute([
             'date' => $this->date,
             'hour' => $this->hour,
-            'halls_id' => $this->halls_id,
+            'halls_id' => $this->hallsId,
             ]);
         
         $reservation = $selectStatement->fetch();
