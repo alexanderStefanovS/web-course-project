@@ -9,7 +9,7 @@ function checkUser() {
     })
     .then( data => {
         if (!data.value || data.value.role !== '2') {
-            location.replace("../login/login.html");
+            location.href = "../login/login.html";
         } else {
             user = data.value;
             getTeacherSubjects();
@@ -206,7 +206,7 @@ const onFormSubmitted = event => {
 document.getElementById('reservation-form').addEventListener('submit', onFormSubmitted);
 
 goBtn.addEventListener('click', () => {
-    location.replace("../general_view/general_view.html");
+    location.href = "../general_view/general_view.html";
 });
 
 //#endregion

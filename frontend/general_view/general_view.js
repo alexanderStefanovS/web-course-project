@@ -57,7 +57,7 @@ document.getElementById('bl2-b').addEventListener("click", () => {
 });
 
 goBtn.addEventListener('click', () => {
-  location.replace('../hall_reservation/hall_reservation.html');
+  location.href = '../hall_reservation/hall_reservation.html';
 });
 
 searchDistBtn.addEventListener('click', () => {
@@ -136,7 +136,7 @@ function checkUser() {
     })
     .then( data => {
       if (!data.value) {
-        location.replace("../login/login.html");
+        location.href = "../login/login.html";
       } else {
         if (data.value.role !== TEACHER_ROLE) {
           hideGoBtn();
