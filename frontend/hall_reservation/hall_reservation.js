@@ -5,6 +5,9 @@ const TEACHER_ROLE = '2';
 function checkUser() {
     fetch('../../backend/endpoints/check_user.php')
     .then(response => {
+        if (!response.ok) {
+            throw new Error('Error checking user.');
+        }
         return response.json();
     })
     .then( data => {
@@ -14,28 +17,43 @@ function checkUser() {
             user = data.value;
             getTeacherSubjects();
         }
+    })
+    .catch(error => {
+        console.error('Грешка при автентикация на потребител.');
     });
 }
 
 function getHalls() {
     fetch("../../backend/endpoints/get_halls.php")
     .then(response => {
+        if (!response.ok) {
+            throw new Error('Error loading halls.');
+        }
         return response.json();
     })
     .then(data => {
         halls = data.value;
         placeHalls(halls);
+    })
+    .catch(error => {
+        console.error('Грешка при зареждане на залите.');
     });
 }
 
 function getTeacherSubjects() {
     fetch("../../backend/endpoints/get_teacher_subjects.php?userId=" + user.id)
     .then(response => {
+        if (!response.ok) {
+            throw new Error('Error loading halls.');
+        }
         return response.json();
     })
     .then(data => {
         subjects = data.value;
         getTeacherSubjectsOptions();
+    })
+    .catch(error => {
+        console.error('Грешка при зареждане на предметите.');
     });
 }
 
@@ -196,10 +214,18 @@ const onFormSubmitted = event => {
             method: 'POST',
             body: JSON.stringify(formData),
         })
-        .then(response=>response.json())
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Error reserving halls.');
+            }
+            response.json(); 
+        })
         .then(response => {
             console.log(response);
             document.getElementById('user-message').innerText = response.message;
+        })
+        .catch(error => {
+            console.error('Грешка при запазване на зала.');
         });
     }
 }

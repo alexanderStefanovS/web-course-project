@@ -126,17 +126,26 @@ logoutBtn.addEventListener('click', () => {
 function getHalls() {
   fetch("../../backend/endpoints/get_halls.php")
     .then(response => {
+      if (!response.ok) {
+        throw new Error('Error loading halls.');
+      }
       return response.json();
     })
     .then(data => {
       halls = data.value;
       placeHalls(data.value);
+    })
+    .catch(error => {
+      console.error('Грешка при зареждане на залите.');
     });
 }
 
 function checkUser() {
   fetch('../../backend/endpoints/check_user.php')
     .then(response => {
+      if (!response.ok) {
+        throw new Error('Error checking user.');
+      }
       return response.json()
     })
     .then( data => {
@@ -147,6 +156,9 @@ function checkUser() {
           hideGoBtn();
         }
       }
+    })
+    .catch(error => {
+      console.error('Грешка при автентикация на потребител.');
     });
 }
 
@@ -160,14 +172,22 @@ function getDistance(halls) {
   }
   fetch('../../backend/endpoints/get_distance.php', init)
     .then( (response) => {
+      if (!response.ok) {
+        throw new Error('Error getting distance.');
+      }
       return response.json();
     })
     .then( (data) => {
       if (data.success === true) {
         showDistance(data.value);
       } else {
-        showDistanceError();
+        showDistanceError('Въведените номера на зали са некоректни');
       }
+    })
+    .catch(error => {
+      const message = 'Грешка при намиране на разстояние между две зали.';
+      showDistanceError(message);
+      console.error(message);
     });
 }
 
@@ -177,6 +197,9 @@ function getSchedule(schedule) {
     body: JSON.stringify(schedule),
   })
     .then( (response) => {
+      if (!response.ok) {
+        throw new Error('Error searching schedule.');
+      }
       return response.json();
     })
     .then( (data) => {
@@ -187,16 +210,12 @@ function getSchedule(schedule) {
       } else {
         showSearchScheduleError(data.message);
       }
+    })
+    .catch(error => {
+      const message = 'Грешка при търсене на график.';
+      showSearchScheduleError(message);
+      console.error(message);
     });
-}
-
-function getHourOptions() {
-  for(var i = 7; i <= 20; i ++){
-      var option = document.createElement('option');
-      option.text = i + ":00 ч.";
-      option.value = i;
-      hour.appendChild(option);
-  }
 }
 
 function exportCSV(schedule) {
@@ -204,6 +223,9 @@ function exportCSV(schedule) {
     method: 'POST',
     body: JSON.stringify(schedule),
   }).then( (response) => {
+      if (!response.ok) {
+        throw new Error('Error exporting schedule.');
+      }
        return response.json();
     })
     .then( (data) => {
@@ -216,8 +238,39 @@ function exportCSV(schedule) {
       } else {
         showSearchScheduleError(data.message);
       }
+    })
+    .catch(error => {
+      const message = 'Грешка при експорт на график.';
+      showSearchScheduleError(message);
+      console.error(message);
     });
 }
+
+function logout() {
+  fetch('../../backend/endpoints/logout.php', {
+    method: 'GET'
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Error logout user.');
+    }
+    return response.json();
+  })
+  .then(response => {
+      if (response.success) {
+          document.location.reload();
+      }
+  })
+  .catch(error => {
+    const message = 'Грешка при изход на потребител.';
+    showSearchScheduleError(message);
+    console.error(message);
+  });
+}
+
+// #endregion
+
+//#region Functions
 
 function download(filename, csvContent) {
   csvContent = 'data:text/csv;charset=utf-8,' + csvContent;
@@ -229,20 +282,14 @@ function download(filename, csvContent) {
   link.click();
 }
 
-function logout() {
-  fetch('../../backend/endpoints/logout.php', {
-    method: 'GET'
-  }).then(response=>response.json())
-  .then(response => {
-      if (response.success) {
-          document.location.reload();
-      }
-  });
+function getHourOptions() {
+  for(var i = 7; i <= 20; i ++){
+      var option = document.createElement('option');
+      option.text = i + ":00 ч.";
+      option.value = i;
+      hour.appendChild(option);
+  }
 }
-
-// #endregion
-
-//#region Functions
 
 function placeHalls(halls) {
   halls.forEach( (hall) => {
@@ -263,8 +310,8 @@ function showDistance(mins) {
   distMessage.innerText = 'Търсеното разстояние е ' + mins + ' ' + min + '.'; 
 }
 
-function showDistanceError() {
-  distMessage.innerText = 'Въведените номера на зали са некоректни';
+function showDistanceError(message) {
+  distMessage.innerText = message;
   distMessage.style.color = 'red';
 }
 
