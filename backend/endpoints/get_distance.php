@@ -81,6 +81,7 @@ if (!isset($_POST["halls"])) {
 
   $json = $_POST["halls"];
   $halls = json_decode($json, false);
+
   $fromHall = $halls->fromHall;
   $toHall = $halls->toHall;
 
@@ -99,7 +100,6 @@ if (!isset($_POST["halls"])) {
       'message' => "Разтоянието между двете зали",
       'value' => $distance
     ]); 
-    exit();
   }
 
   echo $response; 

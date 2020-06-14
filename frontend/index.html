@@ -6,8 +6,8 @@
     </head>
     <body>
         <script>
-           location.replace("./frontend/login/login.html");
-            fetch('./backend/endpoints/check_user.php')
+           location.replace("./login/login.html");
+            fetch('../backend/endpoints/check_user.php')
                 .then(response => {
                 return response.json();
                 })

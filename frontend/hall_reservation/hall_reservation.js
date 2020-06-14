@@ -57,6 +57,25 @@ function getTeacherSubjects() {
     });
 }
 
+function reserveHall(formData) {
+    fetch('../../backend/endpoints/hall_reservation.php', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Error reserving halls.');
+        }
+        return response.json(); 
+    })
+    .then(response => {
+        document.getElementById('user-message').innerText = response.message;
+    })
+    .catch(error => {
+        console.error('Грешка при запазване на зала.');
+    });
+}
+
 //#endregion
 
 //#region Functions
@@ -207,26 +226,8 @@ const onFormSubmitted = event => {
             hourFrom: hourFrom,
             hourTo: hourTo,
         };
-
-        console.log(formData);
         
-        fetch('../../backend/endpoints/hall_reservation.php', {
-            method: 'POST',
-            body: JSON.stringify(formData),
-        })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Error reserving halls.');
-            }
-            response.json(); 
-        })
-        .then(response => {
-            console.log(response);
-            document.getElementById('user-message').innerText = response.message;
-        })
-        .catch(error => {
-            console.error('Грешка при запазване на зала.');
-        });
+        reserveHall(formData);
     }
 }
 
