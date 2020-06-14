@@ -31,6 +31,7 @@
         'message' => "Неуспешно свързване с базата данни",
         'value' => null
       ]);
+      exit();
     }
 
     $user = getUser($connection, $username);

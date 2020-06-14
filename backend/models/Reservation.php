@@ -19,8 +19,17 @@ class Reservation {
     }
 
     public function storeInDb(): void {
-        $database = new DB();
-        $connection = $database->getConnection();
+        try {
+            $database = new DB();
+            $connection = $database->getConnection();
+        }
+        catch (PDOException $e) {
+			echo json_encode([
+				'success' => false,
+				'message' => "Неуспешно свързване с базата данни",
+            ]);
+            exit();
+		}
 
         $insertStatement = $connection->prepare(
             "INSERT INTO `halls_schedule` (date, hour, users_subjects_id, halls_id)
@@ -54,8 +63,18 @@ class Reservation {
     }
 
     public function checkReservation(): void {
-        $database = new DB();
-        $connection = $database->getConnection();
+
+        try{
+            $database = new DB();
+            $connection = $database->getConnection();
+        }
+        catch (PDOException $e) {
+			echo json_encode([
+				'success' => false,
+				'message' => "Неуспешно свързване с базата данни",
+            ]);
+            exit();
+		}
 
         $this->checkHall($connection);
 

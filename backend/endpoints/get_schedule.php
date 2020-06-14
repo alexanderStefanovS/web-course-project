@@ -42,7 +42,8 @@ catch (PDOException $e) {
 		'success' => false,
         'message' => "Неуспешно свързване с базата данни.",
         'value' => null,
-	]);
+    ]);
+    exit();
 }
 
 $schedules = getSchedules($connection, $date, $hour);

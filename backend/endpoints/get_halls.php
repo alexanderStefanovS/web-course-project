@@ -25,7 +25,8 @@ catch (PDOException $e) {
 		'success' => false,
     'message' => "Неуспешно свързване с базата данни",
     'value' => null
-	]);
+  ]);
+  exit();
 }
 
 $halls = getHalls($connection);

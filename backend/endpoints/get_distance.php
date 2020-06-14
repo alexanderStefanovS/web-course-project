@@ -62,6 +62,7 @@ if (!isset($_POST["halls"])) {
     'message' => "Некоректни данни",
     'value' => null
   ]); 
+  exit();
 
 } else {
 
@@ -75,6 +76,7 @@ if (!isset($_POST["halls"])) {
       'message' => "Неуспешно свързване с базата данни",
       'value' => null
     ]);
+    exit();
   }
 
   $json = $_POST["halls"];
@@ -97,6 +99,7 @@ if (!isset($_POST["halls"])) {
       'message' => "Разтоянието между двете зали",
       'value' => $distance
     ]); 
+    exit();
   }
 
   echo $response; 

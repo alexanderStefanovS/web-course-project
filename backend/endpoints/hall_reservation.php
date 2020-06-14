@@ -82,6 +82,7 @@ if (!isset($_SESSION['username'])) {
                         'success' => false,
                         'message' => $e->getMessage(),
                     ]);
+                    exit();
                 }
             }
 

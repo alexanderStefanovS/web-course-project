@@ -26,9 +26,17 @@ class User {
         
         require_once "../db/DB.php";
 
-        $db = new DB();
-        
-		$conn = $db->getConnection();
+		try{
+			$db = new DB();
+			$conn = $db->getConnection();
+		}
+		catch (PDOException $e) {
+			echo json_encode([
+				'success' => false,
+				'message' => "Неуспешно свързване с базата данни",
+			]);
+			exit();
+		}
 		
         $selectStatement = $conn->prepare("SELECT * FROM `users` WHERE username = :username");
         $result = $selectStatement->execute(['username' => $this->username]);
@@ -47,9 +55,16 @@ class User {
 	public function storeInDb(): void {
 		require_once "../db/DB.php";
 
-		$db = new DB();
-	
-        $conn = $db->getConnection();
+		try{
+			$db = new DB();
+			$conn = $db->getConnection();
+		}
+		catch (PDOException $e) {
+			echo json_encode([
+				'success' => false,
+				'message' => "Неуспешно свързване с базата данни",
+			]);
+		}
 
         $insertStatement = $conn->prepare(
             "INSERT INTO `users` (username, password, email, firstname, lastname, roles_id)
