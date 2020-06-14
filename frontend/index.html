@@ -6,7 +6,17 @@
     </head>
     <body>
         <script>
-          location.href = "./login/login.html";
-        </script>
+           location.replace("./frontend/login/login.html");
+            fetch('./backend/endpoints/check_user.php')
+                .then(response => {
+                return response.json();
+                })
+                .then( data => {
+                if (!data.value) {
+                    location.replace("./frontend/login/login.html");
+                } else {
+                    location.replace("./frontend/general_view/general_view.html");
+                }
+                });        </script>
     </body>
 </html>
